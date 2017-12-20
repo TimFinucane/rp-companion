@@ -6,5 +6,9 @@ dist/
 
 # Visual studio/code
 bin/
+obj/
 *.sln
 *.njsproj*
+
+# Linting
+tslint.json

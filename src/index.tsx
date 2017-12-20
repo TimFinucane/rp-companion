@@ -1,4 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-ReactDOM.render( <h1>Hello World!</h1>, document.getElementById( "root" ) );
+import { Explorer } from "./explorer";
+
+ReactDOM.render( <Explorer />, document.getElementById( "root" ) );
