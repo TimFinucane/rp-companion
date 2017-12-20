@@ -1,3 +1,10 @@
+.*/
+
+# General npm/webpack ignores
 node_modules/
 dist/
-.*/
+
+# Visual studio/code
+bin/
+*.sln
+*.njsproj*
