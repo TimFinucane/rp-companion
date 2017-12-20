@@ -1,0 +1,19 @@
+﻿.element {
+    padding: 8px 16px;
+    cursor: pointer;
+}
+.element:hover {
+    background-color: slategrey;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.element:active {
+    background-color: slategrey;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.list {
+    list-style: none;
+    width: fit-content;
+    padding: 0;
+    background-color: darkgrey;
+}

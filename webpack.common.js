@@ -1,6 +1,7 @@
 var path = require("path");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
 
 module.exports =
 {
@@ -17,8 +18,28 @@ module.exports =
     module:
     {
         rules: [
-            { test: /\.tsx?$/,  use: "ts-loader" },
-            { test: /\.css$/,   use: ["style-loader", "css-loader"] }
+            {
+                test: /\.tsx?$/,
+                use: "ts-loader"
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    {
+                        loader: "style-loader"
+                    },
+                    {
+                        loader: 'css-loader',
+                        options:
+                        {
+                            modules: true
+                        }
+                    },
+                    {
+                        loader: "sass-loader"
+                    }
+                ]
+            }
         ]
     },
     plugins:

@@ -4,30 +4,28 @@
  */
 
 import * as React from "react";
+const css = require( "./explorer.scss" );
 
-class ElementProps
-{
-    public "data-name": string;
-}
-
-class Element extends React.Component<ElementProps, any>
+class Element extends React.Component<{ name: string }>
 {
     public render()
     {
-        return <li>Element {this.props["data-name"]}</li>;
+        return <li className={css.element}>Element {this.props.name}</li>;
     }
 }
 
-export class Explorer extends React.Component
+export class Explorer extends React.Component<{ names: string[] }>
 {
     public render()
     {
-        return (
-            <ul>
-                <Element data-name="A"/>
-                <Element data-name="B"/>
-                <Element data-name="C"/>
-            </ul>
-        );
+        // Render each element as a list
+        const elements: JSX.Element[] = [];
+
+        for ( const name of this.props.names )
+        {
+            elements.push( <Element key={name} name={name} /> );
+        }
+
+        return <ul className={css.list}>{elements}</ul>;
     }
 }
