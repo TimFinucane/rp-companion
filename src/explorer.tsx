@@ -18,7 +18,7 @@ export class Explorer extends React.Component<{ names: string[] }>
 {
     public render()
     {
-        // Render each element as a list
+        // Render each element inside a list list
         const elements: JSX.Element[] = [];
 
         for ( const name of this.props.names )
