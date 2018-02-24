@@ -1,11 +1,20 @@
 {
-  "compilerOptions": 
-  {
+  "compilerOptions": {
+    "pretty": true,
+
     "outDir": "./dist/",
+
     "noImplicitAny": true,
-    "module": "es6",
+
+    "strict": true,
+    "module": "esnext",
+    "lib": [ "es2015", "dom" ],
+    "experimentalDecorators": true,
     "target": "es5",
+
     "jsx": "react",
-    "allowJs": true
+    "allowJs": true,
+
+    "allowSyntheticDefaultImports": true
   }
 }
