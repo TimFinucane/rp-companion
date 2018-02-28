@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 
 import { Section, SectionInfo } from './section';
-import styles from './styles.scss';
+import styles from './wiki-styles.scss';
 
 interface PageProps
 {

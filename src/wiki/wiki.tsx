@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import { Page, PageInfo } from './page';
 import { Explorer, ExplorerProps, Folder as ExplorerFolder } from './explorer';
-import styles from './styles.scss';
+import styles from './wiki-styles.scss';
 
 interface Folder
 {
