@@ -1,42 +1,46 @@
 ﻿import * as React from 'react';
 import styles from './wiki-styles.scss';
 
-export interface Folder
+interface File
 {
     name: string;
-    children: File[];
 }
-type File = Folder | { name: string };
+interface Folder extends File
+{
+    files: File[];
+}
 
 export interface ExplorerProps
 {
     curFile: string[]; // Path to currently used file
-    root: File; // The folder structure
+    root: any; // The folder structure
 }
+
+function render_path( file: File, selected: string[] ): JSX.Element
+{
+    if( (file as Folder).files )
+        return FolderElement( file as Folder, selected );
+    else
+        return FileElement( file, selected[0] );
+}
+
+const FileElement = (file: File, selected: string) => (
+    <nav key={file.name} className={styles.file + (selected === file.name) ? ' ' + styles.selected : ''}>{file.name}</nav>
+);
+const FolderElement = (folder: Folder, selected: string[]) => {
+    const isSelected = selected.length > 0 && selected[0] === folder.name;
+
+    return <div className={styles.folder + isSelected ? ' ' + styles.selected : ''}>
+        <h6>{folder.name}</h6>
+        { folder.files.map( (child) => render_path( child, isSelected ? selected.slice( 1 ) : [] ) ) }
+    </div>;
+};
 
 /*
  * Shows the entire folder/file set as a tree-like structure.
  */
-export class Explorer extends React.Component<ExplorerProps, {}>
-{
-    public render()
-    {
-        return <div className={styles.explorer}>
-            <h1 className={styles.title}>{this.props.root.name}</h1>
-            <ul>{( this.props.root as Folder ).children.map( (child) => this.render_file( child ) )}</ul>
-        </div>;
-    }
-
-    private render_file( file: File ): JSX.Element
-    {
-        if( (file as Folder).children )
-            return <li className={styles.folder} key={file.name}>
-                <p className={styles.title}>{file.name}</p>
-                <ul>
-                    {( file as Folder ).children.map( (child) => this.render_file( child ) )}
-                </ul>
-            </li>;
-        else
-            return <li className={styles.file} key={file.name}>{file.name}</li>;
-    }
-}
+export const Explorer = ( props: ExplorerProps ) => (
+    <div className={styles.explorer}>
+        {render_path( props.root, props.curFile )}
+    </div>
+)
