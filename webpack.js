@@ -32,10 +32,11 @@ const base_environment =
                         loader: "style-loader"
                     },
                     {
-                        loader: 'css-loader',
+                        loader: 'typings-for-css-modules-loader',
                         options:
                         {
-                            modules: true
+                            modules: true,
+                            namedExport: true
                         }
                     },
                     {

@@ -3,6 +3,7 @@
 # General npm/webpack ignores
 node_modules/
 dist/
+*.d.ts
 
 # Visual studio/code
 bin/
