@@ -10,6 +10,6 @@ export enum ElementType
 
 export interface Element
 {
-    type: ElementType,
-    content: any
+    type: ElementType;
+    content: any;
 }
