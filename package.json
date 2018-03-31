@@ -1,21 +1,22 @@
 {
-  "name": "private-wiki",
-  "version": "0.0.1",
-  "description": "An offline wiki editor and viewer",
+  "name": "finucane-portfolio",
+  "version": "1.0.0",
+  "description": "Personal website",
   "main": "index.js",
-  "author": "Tim Finucane",
+  "repository": "https://github.com/TimFinucane/finucane-portfolio",
+  "author": "Timothy Finucane <timfinucane@outlook.com>",
   "license": "MIT",
   "dependencies": {
     "@types/react": "^16.0.38",
     "@types/react-dom": "^16.0.4",
-    "@types/showdown": "^1.7.2",
+    "@types/showdown": "^1.7.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "request": "^2.83.0",
     "showdown": "^1.8.6"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.17",
+    "csp-webpack-plugin": "^1.0.2",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.6",
@@ -24,18 +25,13 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
     "ts-loader": "^3.5.0",
+    "tslint": "^5.9.1",
     "typescript": "^2.6.2",
     "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.9.7",
-    "webpack-merge": "^4.1.2"
+    "webpack-dev-server": "^2.9.7"
   },
   "scripts": {
-    "debug": "webpack-dev-server --open --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js"
-  },
-  "-vs-binding": {
-    "BeforeBuild": [
-      "debug"
-    ]
+    "build": "webpack --env.production --config webpack.js",
+    "debug": "webpack-dev-server --open --env.development --config webpack.js"
   }
 }
