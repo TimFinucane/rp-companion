@@ -1,5 +1,6 @@
 ﻿import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
 import { Wiki } from './wiki';
 import { ElementType } from './wiki/section-elements/element';
@@ -43,4 +44,16 @@ const wikiInfo = {
     }
 };
 
-ReactDOM.render( <Wiki {...wikiInfo} />, document.getElementsByTagName( "body" )[0] );
+const App = () => (
+    <BrowserRouter>
+        <div>
+            <Link to="/wiki">Go to wiki</Link>
+            <br />
+            <Link to="/map">Go to map</Link>
+            <Route path="/wiki" component={() => <Wiki {...wikiInfo} />}/>
+            <Route path="/map" component={() => <p>todo</p>}/>
+        </div>
+    </BrowserRouter>
+);
+
+render( <App />, document.getElementById( "harper" ) );
