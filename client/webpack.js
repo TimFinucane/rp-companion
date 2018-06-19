@@ -48,7 +48,7 @@ const base_environment =
     },
     plugins:
     [
-        new CleanWebpackPlugin(['./dist']),
+        new CleanWebpackPlugin(['./www']),
         new HtmlWebpackPlugin({ template: './src/index.template.html', inject: 'body' }),
         new webpack.WatchIgnorePlugin([/css\.d\.ts$/]),
     ]
@@ -69,11 +69,21 @@ module.exports = env =>
     {
         let development_environment = base_environment;
         development_environment.devtool = 'inline-source-map';
-        development_environment.devServer = { contentBase: './dist', hot: true, historyApiFallback: true, publicPath: '/'};
+        development_environment.devServer = {
+            contentBase: './www', hot: true,
+            historyApiFallback: true,
+            publicPath: '/',
+            proxy: {
+                '/api': {
+                     target: 'http://localhost:8081',
+                     secure: false
+                 }
+             }
+            };
         development_environment.plugins.push(
             new webpack.HotModuleReplacementPlugin()
         );
-
+        
         return development_environment;
     }
     else
