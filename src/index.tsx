@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { Wiki } from './wiki/wiki';
+import { Wiki } from './wiki';
 import { ElementType } from './wiki/section-elements/element';
 import './styles.scss';
 
@@ -30,10 +30,16 @@ const page1 = {
 };
 
 const wikiInfo = {
-    selected: ['page_one'],
+    selected: ['example-wiki', 'folder1', 'page1'],
     root: {
         name: 'example-wiki',
-        children: [page1]
+        files: [
+            { name: 'folder1', files: [{ name: 'page1' }, {name: 'page2'}] }
+        ]
+    },
+
+    pages: {
+        'example-wiki/folder1/page1': page1
     }
 };
 

@@ -6,49 +6,6 @@
     display: flex;
     flex-direction: row;
 
-    .explorer {
-        display: inline-block;
-        width: 140px;
-        height: 100%;
-        
-        vertical-align: top;
-        padding: 5px;
-
-        background-color: slategrey;
-
-        & > .title {
-            width: auto;
-
-            padding: 5px;
-            margin: -5px;
-
-            background-color: rgba(0, 0, 0, 0.34);
-
-            font-size: 18px;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .folder {
-            .title {
-                font-size: 18px;
-                margin: 5px;
-            }
-
-            & .selected {
-                font-weight: bold;
-            }
-        }
-
-        .file {
-            font-size: 16px;
-
-            & .selected {
-                font-weight: bold;
-            }
-        }
-    }
-
     .page {
         display: inline-block;
         height: 100%;

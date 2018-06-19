@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import styles from './wiki-styles.scss';
+import * as styles from './styles.scss';
 
 interface File
 {
@@ -12,7 +12,7 @@ interface Folder extends File
 
 export interface ExplorerProps
 {
-    curFile: string[]; // Path to currently used file
+    selected: string[]; // Path to currently used file
     root: any; // The folder structure
 }
 
@@ -25,14 +25,15 @@ function render_path( file: File, selected: string[] ): JSX.Element
 }
 
 const FileElement = (file: File, selected: string) => (
-    <nav key={file.name} className={styles.file + (selected === file.name) ? ' ' + styles.selected : ''}>{file.name}</nav>
+    <div key={file.name} className={styles.file + ((selected === file.name) ? ' ' + styles.selected : '')}>{file.name}</div>
 );
 const FolderElement = (folder: Folder, selected: string[]) => {
     const isSelected = selected.length > 0 && selected[0] === folder.name;
+    const nextSelection = isSelected ? selected.slice( 1 ) : [];
 
-    return <div className={styles.folder + isSelected ? ' ' + styles.selected : ''}>
-        <h6>{folder.name}</h6>
-        { folder.files.map( (child) => render_path( child, isSelected ? selected.slice( 1 ) : [] ) ) }
+    return <div className={styles.folder + (isSelected ? ' ' + styles.selected : '')}>
+        <div className={styles.title}>{folder.name}</div>
+        { folder.files.map( (child) => render_path( child, nextSelection ) ) }
     </div>;
 };
 
@@ -41,6 +42,6 @@ const FolderElement = (folder: Folder, selected: string[]) => {
  */
 export const Explorer = ( props: ExplorerProps ) => (
     <div className={styles.explorer}>
-        {render_path( props.root, props.curFile )}
+        {render_path( props.root, props.selected )}
     </div>
 )

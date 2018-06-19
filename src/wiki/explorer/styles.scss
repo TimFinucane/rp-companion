@@ -1,0 +1,48 @@
+.explorer {
+    display: inline-block;
+    width: 140px;
+    height: 100%;
+    
+    vertical-align: top;
+    padding: 5px;
+
+    background-color: slategrey;
+
+    font-family: sans-serif;
+
+    & > .title {
+        width: auto;
+
+        padding: 5px;
+        margin: -5px;
+
+        background-color: rgba(0, 0, 0, 0.34);
+
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .folder {
+        margin-left: 5px;
+
+        .title {
+            font-size: 18px;
+            margin-left: -5px;
+        }
+
+        &.selected {
+            .title {
+                font-weight: bold;
+            }
+        }
+    }
+
+    .file {
+        font-size: 16px;
+
+        &.selected {
+            font-weight: bold;
+        }
+    }
+}

@@ -1,6 +1,6 @@
-﻿import React from 'react';
+﻿import * as React from 'react';
 import * as SectionElements from './section-elements/element';
-import styles from './wiki-styles.scss';
+import * as styles from './styles.scss';
 
 interface SectionProps
 {

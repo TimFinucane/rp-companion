@@ -1,22 +1,22 @@
 {
-  "include": ["./src/"],
+  "exclude": [
+    "node_modules"
+  ],
 
   "compilerOptions": {
     "pretty": true,
 
     "outDir": "./dist/",
 
-    "noImplicitAny": true,
-
     "strict": true,
-    "module": "es6",
-    "lib": [ "es2015", "dom" ],
+    "module": "esnext",
+    "lib": [ "esnext", "dom" ],
     "experimentalDecorators": true,
     "target": "es5",
 
-    "jsx": "react",
-    "allowJs": true,
+    "moduleResolution": "node",
 
-    "allowSyntheticDefaultImports": true
+    "jsx": "react",
+    "allowJs": true
   }
 }

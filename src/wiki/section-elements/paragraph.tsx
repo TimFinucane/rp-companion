@@ -1,5 +1,5 @@
-﻿import React from 'react';
-import Showdown from 'showdown';
+﻿import * as React from 'react';
+import * as showdown from 'showdown';
 
 interface ParagraphProps
 {
@@ -10,7 +10,7 @@ export class Paragraph extends React.Component<ParagraphProps, {}>
 {
     public render()
     {
-        const converter = new Showdown.Converter();
+        const converter = new showdown.Converter();
         const htmlText = converter.makeHtml( this.props.markdown );
 
         // TODO: Security

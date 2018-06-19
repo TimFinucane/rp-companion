@@ -3,7 +3,6 @@ const webpack = require( 'webpack' );
 
 const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 const CleanWebpackPlugin = require( 'clean-webpack-plugin' );
-const ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
 const UglifyJSPlugin = require( 'uglifyjs-webpack-plugin' );
 
 const base_environment =
@@ -36,6 +35,7 @@ const base_environment =
                         options:
                         {
                             modules: true,
+                            camelCase: true,
                             namedExport: true
                         }
                     },
@@ -49,7 +49,8 @@ const base_environment =
     plugins:
     [
         new CleanWebpackPlugin(['./dist']),
-        new HtmlWebpackPlugin({ template: './src/index.template.html', inject: 'body' })
+        new HtmlWebpackPlugin({ template: './src/index.template.html', inject: 'body' }),
+        new webpack.WatchIgnorePlugin([/css\.d\.ts$/]),
     ]
 };
 
@@ -68,7 +69,7 @@ module.exports = env =>
     {
         let development_environment = base_environment;
         development_environment.devtool = 'inline-source-map';
-        development_environment.devServer = { contentBase: './dist', hot: true };
+        development_environment.devServer = { contentBase: './dist', hot: true, historyApiFallback: true, publicPath: '/'};
         development_environment.plugins.push(
             new webpack.HotModuleReplacementPlugin()
         );
