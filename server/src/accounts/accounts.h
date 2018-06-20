@@ -1,5 +1,6 @@
 #pragma once
 
+#include <map>
 #include <cpprest/asyncrt_utils.h>
 #include <codecvt>
 
@@ -70,13 +71,13 @@ namespace accounts
         // Methods
 
         // Checks whether there is an account with the given username
-        bool        exists( const string_t& username )
+        bool        exists( const string_t& username ) const
         {
             return passwords.find( username ) != passwords.end();
         }
         // Checks whether an account exists and has the given password.
         // Returns false if the password is incorrect, and Account_not_found_error if the account doesnt exist
-        bool        verify( const string_t& username, const string_t& password )
+        bool        verify( const string_t& username, const string_t& password ) const
         {
             auto account_it = passwords.find( username );
 
@@ -118,7 +119,7 @@ namespace accounts
 
         // Creates a token for a given account.
         // May throw Account_not_found_error and Password_incorrect_error in either situation.
-        // Returns the token that can now be used
+        // Returns the token that can now be used. TODO: token expiration.
         string_t    create_token( const string_t& username, const string_t& password )
         {
             if( !exists( username ) )
@@ -146,7 +147,7 @@ namespace accounts
         }
         // Gets the username of the user associated with a token
         // May throw Token_not_found_error
-        string_t    get_username( const string_t& token )
+        string_t    get_username( const string_t& token ) const
         {
             auto token_it = tokens.find( token );
 
