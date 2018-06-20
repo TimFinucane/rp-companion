@@ -3,6 +3,7 @@ project(harper-server VERSION 0.1.0)
 
 find_package(cpprestsdk REQUIRED)
 
-add_executable(harper-server src/main.cpp)
-target_include_directories(harper-server PRIVATE src/)
+add_executable(harper-server "")
+include(src/CMakeLists.txt)
+
 target_link_libraries(harper-server PUBLIC cpprestsdk::cpprest)
