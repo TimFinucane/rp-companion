@@ -12,3 +12,4 @@ obj/
 
 # Linting
 tslint.json
+/server/CMakeSettings.json
