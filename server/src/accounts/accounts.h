@@ -4,6 +4,8 @@
 #include <cpprest/asyncrt_utils.h>
 #include <codecvt>
 
+#include <fstream>
+
 using string_t = utility::string_t;
 
 namespace accounts
@@ -68,7 +70,26 @@ namespace accounts
     class Accounts
     {
     public:
-        // Methods
+        Accounts( std::string accounts_filename )
+            : accounts_filename( accounts_filename )
+        {
+            // Attempt to load from file
+            std::ifstream accounts_file( accounts_filename );
+
+            if( accounts_file.good() )
+            {
+                // Contains usernames and passwords.
+                auto accounts_json = json::value::parse( accounts_file );
+
+                for( auto& account : accounts_json.as_array() )
+                {
+                    passwords.insert( std::make_pair( account.at( U( "username" ) ).as_string(), account.at( U( "password" ) ).as_string() ) );
+                }
+            }
+        }
+        ~Accounts();
+
+        void        save_to_file();
 
         // Checks whether there is an account with the given username
         bool        exists( const string_t& username ) const
@@ -162,5 +183,6 @@ namespace accounts
         std::map<string_t, string_t>    tokens; // Key = token, Value = username
 
         utility::nonce_generator        token_generator;
+        std::string                     accounts_filename;
     };
 }
