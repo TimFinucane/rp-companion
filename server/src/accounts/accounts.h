@@ -2,7 +2,6 @@
 
 #include <map>
 #include <cpprest/asyncrt_utils.h>
-#include <codecvt>
 
 #include <fstream>
 
@@ -16,7 +15,7 @@ namespace accounts
         Account_overwrite_error( const string_t& username, const char* action )
             : runtime_error(
                 "Account "
-                + std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t>{}.to_bytes( username )
+                + utility::conversions::to_utf8string( username )
                 + " already exists, can't "
                 + action
             )
@@ -28,7 +27,7 @@ namespace accounts
         Account_not_found_error( const string_t& username, const char* action )
             : runtime_error(
                 "Account "
-                + std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t>{}.to_bytes( username )
+                + utility::conversions::to_utf8string( username )
                 + " does not exist when trying to "
                 + action )
         {
@@ -40,7 +39,7 @@ namespace accounts
         Password_incorrect_error( const string_t& username, const char* action )
             : runtime_error(
                 "Account "
-                + std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t>{}.to_bytes( username )
+                + utility::conversions::to_utf8string( username )
                 + " does not have the password given when attempting "
                 + action
             )
@@ -52,7 +51,7 @@ namespace accounts
         Token_not_found_error( string_t token )
             : runtime_error(
                 "Token "
-                + std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t>{}.to_bytes( token )
+                + utility::conversions::to_utf8string( token )
                 + " does not exist."
             )
         {
@@ -73,13 +72,31 @@ namespace accounts
         Accounts( std::string accounts_filename )
             : accounts_filename( accounts_filename )
         {
+            load_from_file();
+        }
+        ~Accounts()
+        {
+            // Prevent it from throwing.
+            try
+            {
+                save_to_file();
+            }
+            catch( std::exception& e )
+            {
+                // TODO: log error here.
+            }
+        }
+
+        // Loads the accounts from file. Only loads usernames and passwords.
+        void        load_from_file()
+        {
             // Attempt to load from file
             std::ifstream accounts_file( accounts_filename );
 
             if( accounts_file.good() )
             {
                 // Contains usernames and passwords.
-                auto accounts_json = json::value::parse( accounts_file );
+                auto accounts_json = web::json::value::parse( accounts_file );
 
                 for( auto& account : accounts_json.as_array() )
                 {
@@ -87,9 +104,26 @@ namespace accounts
                 }
             }
         }
-        ~Accounts();
+        // Save accounts to a file. Overwrites previous, and writes usernames and passwords.
+        // Returns number of accounts saved.
+        size_t        save_to_file()
+        {
+            web::json::value accounts_json;
 
-        void        save_to_file();
+            size_t i = 0;
+            for( auto& account : passwords )
+            {
+                accounts_json[i][U( "username" )] = json::value::string( account.first );
+                accounts_json[i][U( "password" )] = json::value::string( account.second );
+
+                i++;
+            }
+
+            std::ofstream accounts_file( accounts_filename, std::ios_base::out | std::ios_base::trunc );
+            accounts_file << accounts_json.serialize().c_str();
+
+            return i;
+        }
 
         // Checks whether there is an account with the given username
         bool        exists( const string_t& username ) const
@@ -114,7 +148,7 @@ namespace accounts
         {
             auto account_it = passwords.lower_bound( username );
 
-            if( account_it != passwords.end && account_it->first == username )
+            if( account_it != passwords.end() && account_it->first == username )
                 throw Account_overwrite_error( username, "create account" );
 
             passwords.insert( account_it, std::make_pair( username, password ) );
