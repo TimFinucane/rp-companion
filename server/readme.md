@@ -1,3 +1,0 @@
-Uses cpprestsdk
-
-TODO:
