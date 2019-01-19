@@ -2,6 +2,7 @@
 import { render } from 'react-dom';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
+import CharacterScreen from './character-board';
 import { Wiki } from './wiki';
 import { ElementType } from './wiki/section-elements/element';
 import './styles.scss';
@@ -44,15 +45,22 @@ const wikiInfo = {
     }
 };
 
+const characters = [
+    {name: "Lucy", text: "Lucy is a girl"},
+    {name: "Stephen", text: "Stephen is an elf"},
+    {name: "Kate", text: "Kate is a dwarf"}
+];
+
 const App = () => (
     <BrowserRouter>
-        <div>
+        {/*<div>
             <Link to="/wiki">Go to wiki</Link>
             <br />
             <Link to="/map">Go to map</Link>
             <Route path="/wiki" component={() => <Wiki {...wikiInfo} />}/>
             <Route path="/map" component={() => <p>todo</p>}/>
-        </div>
+        </div>*/}
+        <CharacterScreen characters={characters}/>
     </BrowserRouter>
 );
 
