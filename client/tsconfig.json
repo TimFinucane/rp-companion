@@ -17,6 +17,11 @@
     "moduleResolution": "node",
 
     "jsx": "react",
-    "allowJs": true
+    "allowJs": true,
+
+    "baseUrl": "src",
+    "paths": {
+      "common/*": ["../../common/*"]
+    }
   }
 }

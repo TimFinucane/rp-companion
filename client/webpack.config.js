@@ -9,7 +9,12 @@ const base_environment =
 {
     resolve:
     {
-        extensions: ['.ts', '.tsx', '.js', '.scss']
+        extensions: ['.ts', '.tsx', '.js', '.scss'],
+        modules: [
+            path.resolve(__dirname + '/src'),
+            path.resolve(__dirname + '/node_modules'),
+            path.resolve(__dirname + '../')
+        ]
     },
     entry: "./src/",
     output:

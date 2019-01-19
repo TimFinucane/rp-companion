@@ -1,9 +1,9 @@
 {
-  "name": "finucane-portfolio",
+  "name": "",
   "version": "1.0.0",
-  "description": "Personal website",
+  "description": "",
   "main": "index.js",
-  "repository": "https://github.com/TimFinucane/finucane-portfolio",
+  "repository": "",
   "author": "Timothy Finucane <timfinucane@outlook.com>",
   "license": "MIT",
   "dependencies": {
@@ -34,7 +34,7 @@
     "webpack-dev-server": "^2.9.7"
   },
   "scripts": {
-    "build": "webpack --env.production --config webpack.js",
-    "debug": "webpack-dev-server --open --env.development --config webpack.js"
+    "build": "webpack --env.production",
+    "debug": "webpack-dev-server --open --env.development"
   }
 }
