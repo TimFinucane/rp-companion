@@ -12,7 +12,7 @@ export default class Explorer extends React.PureComponent<Props> {
     public render() {
         return <ul>
             {this.props.characters.map(child =>
-                <li onClick={(e) => this.props.onSelect(child.name)}>
+                <li key={child.name} onClick={(e) => this.props.onSelect(child.name)}>
                     {this.props.selected.includes(child.name) ?
                         <b>{child.name}</b> :
                         child.name}
