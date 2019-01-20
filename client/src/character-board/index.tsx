@@ -8,6 +8,7 @@ import Character from 'common/character';
 
 import NoteBoard from './note-board';
 import Explorer from './explorer';
+import * as styles from './styles.scss';
 
 export default class CharacterBoard extends React.Component<{characters: Character[]}, {active_characters: Character[]}> {
 
@@ -26,7 +27,7 @@ export default class CharacterBoard extends React.Component<{characters: Charact
     }
 
     public render() {
-        return <div>
+        return <div className={styles.characterScreen}>
             <Explorer
                 characters={this.props.characters}
                 selected={this.state.active_characters.map(c => c.name)}
