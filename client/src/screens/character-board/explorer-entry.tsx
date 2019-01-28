@@ -40,7 +40,7 @@ const entry_collector: DragSourceCollector<EntryCollectProps> = (connect, monito
 class EntryBase extends React.Component<EntryProps & EntryCollectProps> {
     public render() {
         // TODO: Wait for react-dnd to fix the preview for html5, rather than implement the hacky drag layer.
-        this.props.connect_drag_preview(<div><NoteView {...this.props.character} /></div>);
+        this.props.connect_drag_preview(<div><NoteView character={this.props.character} /></div>);
 
         return this.props.connect_drag_source(
             this.props.is_selected ?

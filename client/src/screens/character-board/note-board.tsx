@@ -38,12 +38,14 @@ const drop_target_collector: DropTargetCollector<CollectedProps> = (connect, mon
 
 // NoteBoard stuff
 interface NoteBoardProps {
+    notes: Note[];
+    characters: Character[]; // TODO: Map instead?
+
     create_note: (note: Note) => void;
     delete_note: (note: Note) => void;
     move_note: (note: Note) => void;
 
-    notes: Note[];
-    characters: Character[]; // TODO: Map instead?
+    modify_character: (original_name: string, character: Character) => any;
 }
 
 class NoteBoard extends React.Component<NoteBoardProps & CollectedProps> {
@@ -55,7 +57,9 @@ class NoteBoard extends React.Component<NoteBoardProps & CollectedProps> {
                         key={note.character_name}
                         className={styles.noteWrapper}
                         style={{left: note.position.x, top: note.position.y, zIndex: i}}>
-                        <NoteView {...this.props.characters.find(c => c.name === note.character_name)!}/>
+                        <NoteView
+                            character={this.props.characters.find(c => c.name === note.character_name)!}
+                            modify_character={this.props.modify_character}/>
                     </div>
                 )}
             </div>,

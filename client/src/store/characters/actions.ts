@@ -1,7 +1,7 @@
 /**
  * Actions for dealing with characters and character screen data.
  */
-import { action, ActionType } from 'typesafe-actions';
+import { action, ActionType, createAction } from 'typesafe-actions';
 import { Character, Note } from 'data/characters';
 
 export enum Names {
@@ -21,7 +21,7 @@ export const actions = {
 
     create_character: (character: Character) => action(Names.CREATE_CHARACTER, character),
     delete_character: (character_name: string) => action(Names.DELETE_CHARACTER, character_name),
-    modify_character: (character: Character) => action(Names.MODIFY_CHARACTER, character)
+    modify_character: (original_name: string, character: Character) => action(Names.MODIFY_CHARACTER, {original_name, character})
 }
 
 export type CharacterActionType = ActionType<typeof actions>;

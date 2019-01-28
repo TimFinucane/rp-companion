@@ -16,10 +16,7 @@ function character_reducer(state = [] as Character[], action: CharacterActionTyp
             return state.filter(c => c.name !== action.payload);
             break;
         case Names.MODIFY_CHARACTER:
-            return [
-                ...state.filter(c => c.name !== action.payload.name),
-                action.payload
-            ];
+            return state.map(c => c.name === action.payload.original_name ? action.payload.character : c);
             break;
         default:
             return state;
@@ -30,16 +27,20 @@ function note_reducer(state = [] as Note[], action: CharacterActionType) {
     switch(action.type) {
         case Names.CREATE_NOTE:
             return [...state, action.payload];
-            break;
         case Names.DELETE_NOTE:
             return state.filter(c => c.character_name !== action.payload);
-            break;
         case Names.MOVE_NOTE:
             return [
                 ...state.filter(c => c.character_name !== action.payload.character_name),
                 action.payload
             ];
-            break;
+        case Names.MODIFY_CHARACTER:
+            return state.map(c => c.character_name === action.payload.original_name ?
+                {...c, character_name: action.payload.character.name} :
+                c
+            );
+        case Names.DELETE_CHARACTER:
+            return state.filter(c => c.character_name === action.payload);
         default:
             return state;
     }
