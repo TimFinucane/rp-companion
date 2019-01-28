@@ -1,67 +1,33 @@
 ﻿import * as React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
-import CharacterScreen from './character-board';
-import { Wiki } from './wiki';
-import { ElementType } from './wiki/section-elements/element';
+import store from 'store';
+
+import CharacterScreen from './screens/character-board';
+import { Wiki } from './screens/wiki';
+import { ElementType } from './screens/wiki/section-elements/element';
 import './styles.scss';
 
-const page1 = {
-    title: 'page_one',
-    author: 'me',
-    visibility: 'all',
-    sections: [
-        {
-            title: 'section_one',
-            author: 'me',
-            elements: [
-                { type: ElementType.PARAGRAPH, content: { markdown: 'Heyoooooo' } },
-                { type: ElementType.PARAGRAPH, content: { markdown: 'Heyooooo2' } }
-            ]
-        },
-        {
-            title: 'section_two',
-            author: 'me',
-            elements: [
-                { type: ElementType.PARAGRAPH, content: { markdown: 'Heyoooooo' } },
-                { type: ElementType.PARAGRAPH, content: { markdown: 'Heyooooo2' } }
-            ]
-        }
-    ]
-};
-
-const wikiInfo = {
-    selected: ['example-wiki', 'folder1', 'page1'],
-    root: {
-        name: 'example-wiki',
-        files: [
-            { name: 'folder1', files: [{ name: 'page1' }, {name: 'page2'}] }
-        ]
-    },
-
-    pages: {
-        'example-wiki/folder1/page1': page1
+class App extends React.Component {
+    public render() {
+        return <Provider store={store}>
+            <BrowserRouter>
+                {/*<div>
+                    <Link to="/wiki">Go to wiki</Link>
+                    <br />
+                    <Link to="/map">Go to map</Link>
+                    <Route path="/wiki" component={() => <Wiki {...wikiInfo} />}/>
+                    <Route path="/map" component={() => <p>todo</p>}/>
+                </div>*/}
+                <CharacterScreen/>
+            </BrowserRouter>
+        </Provider>
     }
-};
+}
+const Wrapped = DragDropContext(HTML5Backend)(App);
 
-const characters = [
-    {name: "Lucy", text: "Lucy is a girl"},
-    {name: "Stephen", text: "Stephen is an elf"},
-    {name: "Kate", text: "Kate is a dwarf"}
-];
-
-const App = () => (
-    <BrowserRouter>
-        {/*<div>
-            <Link to="/wiki">Go to wiki</Link>
-            <br />
-            <Link to="/map">Go to map</Link>
-            <Route path="/wiki" component={() => <Wiki {...wikiInfo} />}/>
-            <Route path="/map" component={() => <p>todo</p>}/>
-        </div>*/}
-        <CharacterScreen characters={characters}/>
-    </BrowserRouter>
-);
-
-render( <App />, document.getElementById( "harper" ) );
+render( <Wrapped />, document.getElementById( "harper" ) );

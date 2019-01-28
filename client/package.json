@@ -9,12 +9,18 @@
   "dependencies": {
     "@types/react": "^16.0.38",
     "@types/react-dom": "^16.0.4",
+    "@types/react-redux": "^7.0.1",
     "@types/react-router-dom": "^4.2.7",
     "@types/showdown": "^1.7.3",
     "react": "^16.2.0",
+    "react-dnd": "^7.0.2",
+    "react-dnd-html5-backend": "^7.0.2",
     "react-dom": "^16.2.0",
+    "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
-    "showdown": "^1.8.6"
+    "redux": "^4.0.1",
+    "showdown": "^1.8.6",
+    "typesafe-actions": "^3.0.0"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.17",

@@ -1,0 +1,60 @@
+.character-screen {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+
+    .explorer {
+        display: inline-block;
+
+        li {
+            padding: 5px;
+            
+            p, b {
+                margin: 0px;
+                padding: 0px;
+
+                margin-block-start: 0;
+                margin-block-end: 0;
+            }
+        }
+    }
+    .note-board {
+        position: relative;
+        display: inline-block;
+        flex-grow: 1;
+
+        .note-wrapper {
+            position: absolute;
+            display: inline-block;
+
+            .note {
+                position: relative;
+                display: inline-block;
+
+                left: -50%;
+
+                border: 1px black solid;
+
+                .title {
+                    display: block;
+                    border: none;
+                    padding: 2px;
+
+                    font-size: 15px;
+                    font-family: 'Times New Roman', Times, serif;
+                    font-weight: bold;
+                }
+                .body {
+                    display: block;
+                    border: none;
+                    padding: 2px;
+
+                    font-size: 12px;
+                    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                }
+            }
+        }
+    }
+}
