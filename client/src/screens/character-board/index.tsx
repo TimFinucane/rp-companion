@@ -1,5 +1,5 @@
 /**
- * The character screen allows you to CRUD character information in a tree-like structure
+ * The character screen allows you to view characters and give them notes
  */
 
 import * as React from 'react';

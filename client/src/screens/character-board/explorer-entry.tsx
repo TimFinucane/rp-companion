@@ -1,7 +1,7 @@
 /**
  * An explorer entry is a single entry in the character explorer screen.
  * In its normal state, it displays the character name (in bold if it's selected already)
- * However, a drag may originate from an explorer entry, in which case a note view is displayed.
+ * However, a drag may originate from an explorer entry, in which case a note view should be (bugged atm) displayed.
  */
 
 import * as React from 'react';
