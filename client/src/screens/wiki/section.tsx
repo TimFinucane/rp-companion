@@ -1,36 +1,30 @@
 ﻿import * as React from 'react';
-import * as SectionElements from './section-elements/element';
+
+import { ElementType } from 'common/wiki/elements';
+import { Section } from 'common/wiki/pages';
+
+import Paragraph from './section-elements/paragraph';
 import * as styles from './styles.scss';
 
-interface SectionProps
-{
-    author: string;
-    visibility?: any;
-    title: string;
-    elements: SectionElements.Element[];
-}
-// Export under different name to recognize there could be a difference between
-// the stored section info in the db and what needs to be passed to Section
-export { SectionProps as SectionInfo };
 
-export class Section extends React.Component<SectionProps, {}>
+export default class SectionView extends React.Component<Section, {}>
 {
     public render()
     {
         return <div>
             <h2 className={styles.title}>{this.props.title}</h2>
             <div className={styles.elements}>
-                {this.props.elements.map( ( element, i ) => this.render_element( element ) )}
+                {this.props.elements.map( (element, i) => this.render_element( element ) )}
             </div>
         </div>;
     }
 
-    private render_element( element: SectionElements.Element )
+    private render_element( element: ElementType )
     {
         switch( element.type )
         {
-            case SectionElements.ElementType.PARAGRAPH:
-                return <SectionElements.Paragraph {...element.content} />; // Produces react unique key warning
+            case "paragraph":
+                return <Paragraph markdown={element.markdown} />; // Produces react unique key warning
         }
         throw Error( 'Cannot create element, unknown element type: ' + element.toString() );
     }

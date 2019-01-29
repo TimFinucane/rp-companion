@@ -5,15 +5,13 @@ import Character from 'common/character';
  * This is some initial test state
  */
 
-const wiki: Wiki = {
-    directory: {
-        'example-wiki': {
-            folder: {
-                a: 'page-a',
-                b: 'page-b'
-            }
-        }
-    },
+const wiki: Wiki | any = {
+    directory: [
+        'page-a',
+        'page-b'
+    ],
+
+    selection: 'page-a',
 
     pages: {
         'page-a': {

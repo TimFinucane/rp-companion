@@ -9,7 +9,6 @@ import store from 'store';
 
 import CharacterScreen from './screens/character-board';
 import Wiki from './screens/wiki';
-import { ElementType } from './screens/wiki/section-elements/element';
 import './styles.scss';
 
 const App = () => <div>

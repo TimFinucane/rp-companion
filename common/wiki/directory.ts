@@ -1,5 +1,6 @@
-interface Folder {
+/*export interface Folder {
     [name: string] : Folder | string;
-}
+}*/
 
-export default Folder;
+type Directory = string[];
+export default Directory;

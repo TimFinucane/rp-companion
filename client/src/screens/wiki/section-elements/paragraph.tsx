@@ -6,7 +6,7 @@ interface ParagraphProps
     markdown: string;
 }
 
-export class Paragraph extends React.Component<ParagraphProps, {}>
+export default class Paragraph extends React.Component<{ markdown: string; }, {}>
 {
     public render()
     {

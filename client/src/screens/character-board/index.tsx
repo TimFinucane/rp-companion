@@ -46,8 +46,7 @@ class CharacterBoard extends React.Component<Props> {
             <Explorer
                 characters={this.props.characters}
                 selected={this.props.notes.map(note => note.character_name)}/>
-            <NoteBoard
-                {...this.props}/>
+            <NoteBoard {...this.props}/>
         </div>;
     }
 }
