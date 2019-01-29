@@ -9,6 +9,8 @@ import { connect } from 'react-redux';
 import { Note, Character } from 'data/characters';
 import { actions } from 'store/characters/actions';
 
+import { State } from 'store';
+
 import NoteBoard from './note-board';
 import Explorer from './explorer';
 
@@ -25,10 +27,10 @@ interface Props {
     modify_character: (original_name: string, character: Character) => any;
 }
 
-function map_state_to_props(state: any) { // TODO: Not any
+function map_state_to_props(state: State) { // TODO: Not any
     return {
-        characters: state.characters,
-        notes: state.notes
+        characters: state.characters.characters,
+        notes: state.characters.notes
     };
 }
 const map_dispatch_to_props = {

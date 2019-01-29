@@ -1,51 +1,53 @@
-import { ElementType } from "screens/wiki/section-elements/element";
+import Wiki from 'common/wiki';
+import Character from 'common/character';
 
 /**
  * This is some initial test state
  */
 
-const not_in_yet = {
-    wiki: {
-        selected: ['example-wiki', 'folder1', 'page1'],
-        root: {
-            name: 'example-wiki',
-            files: [
-                { name: 'folder1', files: [{ name: 'page1' }, {name: 'page2'}] }
-            ]
-        },
-
-        pages: {
-            'example-wiki/folder1/page1': {
-                title: 'page_one',
-                author: 'me',
-                visibility: 'all',
-                sections: [
-                    {
-                        title: 'section_one',
-                        author: 'me',
-                        elements: [
-                            { type: ElementType.PARAGRAPH, content: { markdown: 'Heyoooooo' } },
-                            { type: ElementType.PARAGRAPH, content: { markdown: 'Heyooooo2' } }
-                        ]
-                    },
-                    {
-                        title: 'section_two',
-                        author: 'me',
-                        elements: [
-                            { type: ElementType.PARAGRAPH, content: { markdown: 'Heyoooooo' } },
-                            { type: ElementType.PARAGRAPH, content: { markdown: 'Heyooooo2' } }
-                        ]
-                    }
-                ]
+const wiki: Wiki = {
+    directory: {
+        'example-wiki': {
+            folder: {
+                a: 'page-a',
+                b: 'page-b'
             }
         }
     },
+
+    pages: {
+        'page-a': {
+            title: 'page_one',
+            author: 'me',
+            sections: [
+                {
+                    title: 'section_one',
+                    author: 'me',
+                    elements: [
+                        { type: "paragraph", markdown: 'Heyoooooo' },
+                        { type: "paragraph", markdown: 'Heyooooo2' }
+                    ]
+                },
+                {
+                    title: 'section_two',
+                    author: 'me',
+                    elements: [
+                        { type: "paragraph", markdown: 'Heyoooooo' },
+                        { type: "paragraph", markdown: 'Heyooooo2' }
+                    ]
+                }
+            ]
+        }
+    }
 };
 
+const characters: Character[] = [
+    {name: "Lucy", text: "Lucy is a girl"},
+    {name: "Stephen", text: "Stephen is an elf"},
+    {name: "Kate", text: "Kate is a dwarf"}
+];
+
 export default {
-    characters: [
-        {name: "Lucy", text: "Lucy is a girl"},
-        {name: "Stephen", text: "Stephen is an elf"},
-        {name: "Kate", text: "Kate is a dwarf"}
-    ]
+    wiki,
+    characters: {characters}
 };

@@ -1,6 +1,7 @@
+import { combineReducers } from 'redux';
+
 import { Character, Note } from 'data/characters';
 import { CharacterActionType, actions, Names } from './actions';
-import { combineReducers } from 'redux';
 
 export type State = Readonly<{
     characters: Character[];

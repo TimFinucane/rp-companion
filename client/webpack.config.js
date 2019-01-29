@@ -70,8 +70,8 @@ module.exports = env =>
                 publicPath: '/',
                 proxy: {
                     '/api': {
-                         target: 'http://localhost:8081',
-                         secure: false
+                        target: 'http://localhost:8081',
+                        secure: false
                     }
                 }
             }
