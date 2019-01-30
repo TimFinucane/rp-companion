@@ -1,17 +1,33 @@
 .character-screen {
-    height: 100%;
-    width: 100%;
-
     display: flex;
     flex-direction: row;
 
+    height: 100%;
+    width: 100%;
+
     .explorer {
-        display: inline-block;
+        display: block;
+        flex-grow: 0.1;
+
+        min-width: 150px;
+        height: 100%;
+
+        margin-block-start: 0;
+        margin-block-end: 0;
+
+        border: solid black 1px;
 
         li {
+            display: block;
+
             padding: 5px;
+            width: 100%;
             
             p, b {
+                // This prevents changing ul width when changing from p to b
+                display: block;
+                width: 100%;
+
                 margin: 0px;
                 padding: 0px;
 
@@ -24,6 +40,9 @@
         position: relative;
         display: inline-block;
         flex-grow: 1;
+
+        height: 100%;
+        
 
         .note-wrapper {
             position: absolute;
