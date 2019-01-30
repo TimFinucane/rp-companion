@@ -52,21 +52,23 @@ const base_environment =
     plugins: [
         new CleanWebpackPlugin(['./www']),
         new HtmlWebpackPlugin({ template: './src/index.template.html', inject: 'body' }),
-        new webpack.WatchIgnorePlugin([/css\.d\.ts$/]),
+        new webpack.WatchIgnorePlugin([/css\.d\.ts$/])
     ]
 };
 
 module.exports = env =>
 {
+    const define_plugin = new webpack.DefinePlugin({URL_ROOT: '"' + (env.URL_ROOT || "/") + '"'})
+
     if( env.production )
         return {
             ...base_environment,
-            plugins: [...base_environment.plugins, new UglifyJSPlugin()]
+            plugins: [...base_environment.plugins, new UglifyJSPlugin(), define_plugin]
         };
     else if( env.development )
         return {
             ...base_environment,
-            plugins: [...base_environment.plugins, new webpack.HotModuleReplacementPlugin()],
+            plugins: [...base_environment.plugins, new webpack.HotModuleReplacementPlugin(), define_plugin],
             devtool: 'inline-source-map',
             devServer: {
                 contentBase: './www',

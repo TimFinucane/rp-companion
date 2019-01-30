@@ -11,6 +11,11 @@ import CharacterScreen from './screens/character-board';
 import Wiki from './screens/wiki';
 import * as styles from './styles.scss';
 
+declare var URL_ROOT: string;
+const url_root = URL_ROOT || "/";
+
+console.log(URL_ROOT);
+
 const App = () => <div className={styles.app}>
     <div className={styles.header}>
         <Link className={styles.link} to="/wiki">Wiki</Link>
@@ -26,10 +31,9 @@ const App = () => <div className={styles.app}>
 
 const Wrapped = DragDropContext(HTML5Backend)(() =>
     <Provider store={store}>
-        <BrowserRouter>
+        <BrowserRouter basename={url_root}>
             <App />
         </BrowserRouter>
     </Provider>
 );
-
 render( <Wrapped />, document.getElementById( "coaster" ) );

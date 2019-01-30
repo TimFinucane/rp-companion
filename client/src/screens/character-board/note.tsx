@@ -69,8 +69,6 @@ class NoteView extends React.Component<Props & CollectProps, State> {
         const cols = lines.reduce((val, line) => Math.max(val, line.length), 10) / 1.2;
         const rows = lines.length;
 
-        console.log(lines.map(line => line.length));
-
         return <textarea className={styles.body}
             defaultValue={this.props.character.text}
             onChange={(evt) => this.setState({...this.state, current_text: evt.target.value})}
