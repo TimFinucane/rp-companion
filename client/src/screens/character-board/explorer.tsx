@@ -9,6 +9,8 @@ import { selected } from 'screens/wiki/explorer/styles.scss';
 interface Props {
     characters: Character[];
     selected: string[];
+
+    delete_note: (name: string) => void;
 }
 
 export default class Explorer extends React.PureComponent<Props> {
@@ -16,7 +18,7 @@ export default class Explorer extends React.PureComponent<Props> {
         return <ul className={styles.explorer}>
             {this.props.characters.map(child =>
                 <li key={child.name}>
-                    <Entry character={child} is_selected={this.props.selected.includes(child.name)}/>
+                    <Entry character={child} is_selected={this.props.selected.includes(child.name)} delete_note={this.props.delete_note}/>
                 </li>
             )}
         </ul>;

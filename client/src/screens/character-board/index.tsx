@@ -21,7 +21,7 @@ interface Props {
     notes: Note[];
 
     create_note: (note: Note) => any;
-    delete_note: (note: Note) => any;
+    delete_note: (note_name: string) => any;
     move_note: (note: Note) => any;
 
     modify_character: (original_name: string, character: Character) => any;
@@ -35,7 +35,7 @@ function map_state_to_props(state: State) { // TODO: Not any
 }
 const map_dispatch_to_props = {
     create_note: actions.create_note,
-    delete_note: (note: Note) => actions.delete_note(note.character_name),
+    delete_note: actions.delete_note,
     move_note: actions.move_note,
     modify_character: actions.modify_character
 };
@@ -45,7 +45,8 @@ class CharacterBoard extends React.Component<Props> {
         return <div className={styles.characterScreen}>
             <Explorer
                 characters={this.props.characters}
-                selected={this.props.notes.map(note => note.character_name)}/>
+                selected={this.props.notes.map(note => note.character_name)}
+                delete_note={this.props.delete_note}/>
             <NoteBoard {...this.props}/>
         </div>;
     }

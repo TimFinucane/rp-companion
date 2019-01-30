@@ -14,6 +14,8 @@ import { getEmptyImage } from 'react-dnd-html5-backend';
 interface EntryProps {
     character: Character;
     is_selected: boolean;
+
+    delete_note: (name: string) => void;
 }
 interface EntryCollectProps {
     connect_drag_source: DragElementWrapper<DragSourceOptions>;
@@ -44,7 +46,7 @@ class EntryBase extends React.Component<EntryProps & EntryCollectProps> {
 
         return this.props.connect_drag_source(
             this.props.is_selected ?
-                <b>{this.props.character.name}</b> :
+                <b onClick={() => this.props.delete_note(this.props.character.name)}>{this.props.character.name}</b> :
                 <p>{this.props.character.name}</p>
         );
     }

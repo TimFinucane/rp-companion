@@ -38,7 +38,6 @@ class NoteView extends React.Component<Props & CollectProps, State> {
     public render() {
         // TODO: Bind properly
         return this.props.connect_drag_source(<div className={styles.note}
-            onClick={this.begin_edit.bind(this)}
             onBlur={this.end_edit.bind(this)}>
             {this.render_title()}
             {this.render_body()}
@@ -48,33 +47,34 @@ class NoteView extends React.Component<Props & CollectProps, State> {
     public state = {edit: false, current_title: this.props.character.name, current_text: this.props.character.text};
 
     // PRIVATE
-    private begin_edit() {
+    private end_edit() {
         if(!this.props.modify_character)
             return;
 
-        this.setState({...this.state, edit: true});
-    }
-    private end_edit() {
-        this.props.modify_character!(this.props.character.name, {name: this.state.current_title, text: this.state.current_text});
-        this.setState({...this.state, edit: false});
+        if(this.props.character.name !== this.state.current_title || this.props.character.text !== this.state.current_text)
+            this.props.modify_character!(this.props.character.name, {name: this.state.current_title, text: this.state.current_text});
     }
 
     private render_title() {
-        if(this.state.edit)
-            return <input className={styles.title} type="text"
-                defaultValue={this.props.character.name}
-                onChange={(evt) => this.setState({...this.state, current_title: evt.target.value})}/>;
-        else
-            return <h1 className={styles.title}>{this.props.character.name}</h1>;
+        return <input className={styles.title} type="text"
+            defaultValue={this.props.character.name}
+            onChange={(evt) => this.setState({...this.state, current_title: evt.target.value})}
+            size={this.state.current_title.length / 1.2}/>;
     }
 
     private render_body() {
-        if(this.state.edit)
-            return <textarea className={styles.body}
-                defaultValue={this.props.character.text}
-                onChange={(evt) => this.setState({...this.state, current_text: evt.target.value})}/>;
-        else
-            return <p className={styles.body} >{this.props.character.text}</p>;
+        const lines = this.state.current_text.split('\n');
+
+        // Resize approprately. 1.2 seems good for preventing the textarea from expanding massively.
+        const cols = lines.reduce((val, line) => Math.max(val, line.length), 10) / 1.2;
+        const rows = lines.length;
+
+        console.log(lines.map(line => line.length));
+
+        return <textarea className={styles.body}
+            defaultValue={this.props.character.text}
+            onChange={(evt) => this.setState({...this.state, current_text: evt.target.value})}
+            cols={cols} rows={rows}/>;
     }
 }
 

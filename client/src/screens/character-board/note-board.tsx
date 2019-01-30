@@ -17,18 +17,27 @@ interface CollectedProps {
 
 const drop_target_spec: DropTargetSpec<NoteBoardProps> = {
     drop(props, monitor) {
+        const character_name = monitor.getItem().character_name;
+        const existing_node = props.notes.find(c => c.character_name === character_name);
+
         // Find the relative position of the cursor to our object
         const elementPosition = document.getElementsByClassName(styles.noteBoard)[0].getBoundingClientRect();
         const dropPosition = monitor.getClientOffset()!;
-
         const position = {x: dropPosition.x - elementPosition.left, y: dropPosition.y - elementPosition.top};
-        const character_name = monitor.getItem().character_name;
 
         // Ensure that only one note per character exists
-        if(props.notes.findIndex(c => c.character_name === character_name) !== -1)
-            props.move_note({character_name, position});
-        else
+        if(existing_node) {
+            const initialClick = monitor.getInitialClientOffset()!;
+            const initialNotePos = existing_node.position;
+            const offset = {
+                x: existing_node.position.x - (initialClick.x - elementPosition.left),
+                y: existing_node.position.y - (initialClick.y - elementPosition.top)
+            };
+
+            props.move_note({character_name, position: {x: position.x + offset.x, y: position.y + offset.y}});
+        } else {
             props.create_note({character_name, position});
+        }
     }
 };
 
@@ -42,7 +51,7 @@ interface NoteBoardProps {
     characters: Character[]; // TODO: Map instead?
 
     create_note: (note: Note) => void;
-    delete_note: (note: Note) => void;
+    delete_note: (note_name: string) => void;
     move_note: (note: Note) => void;
 
     modify_character: (original_name: string, character: Character) => any;

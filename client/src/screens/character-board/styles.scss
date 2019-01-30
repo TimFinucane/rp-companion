@@ -53,16 +53,13 @@
 
             .note {
                 position: relative;
-                display: inline-block;
-
-                left: -50%;
+                display: flex;
+                flex-direction: column;
 
                 border: 1px solid $primary-border;
                 background-color: $complementary-light;
 
                 .title {
-                    display: block;
-
                     border: none;
                     padding: 2px;
 
@@ -71,16 +68,17 @@
                     font-size: 15px;
                     font-family: 'Times New Roman', Times, serif;
                     font-weight: bold;
+
+                    margin-block-start: 0.5em;
+                    margin-block-end: 0.5em;
                 }
                 .body {
-                    display: block;
-
                     border: none;
                     padding: 2px;
 
                     background-color: transparent;
 
-                    font-size: 12px;
+                    font-size: 13px;
                     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
                 }
             }
