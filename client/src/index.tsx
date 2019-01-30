@@ -13,11 +13,9 @@ import * as styles from './styles.scss';
 
 const App = () => <div className={styles.app}>
     <div className={styles.header}>
-        <Link to="/wiki">Go to wiki</Link>
-        <br />
-        <Link to="/map">Go to map</Link>
-        <br />
-        <Link to="/characters">Go to characters</Link>
+        <Link className={styles.link} to="/wiki">Wiki</Link>
+        <Link className={styles.link} to="/map">Map</Link>
+        <Link className={styles.link} to="/characters">Characters</Link>
     </div>
     <div className={styles.body}>
         <Route path="/characters" component={() => <CharacterScreen/>}/>

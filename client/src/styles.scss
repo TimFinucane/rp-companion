@@ -1,4 +1,4 @@
-﻿@import './variables';
+﻿@import 'variables';
 
 * {
     box-sizing: border-box;
@@ -24,11 +24,22 @@ html {
             height: 100%;
 
             .header {
-                display: block;
+                display: flex;
+                flex-direction: row;
 
-                width: 100%;
+                background-color: $primary-base;
+                border-bottom: solid 2px $primary-border;
 
-                
+                .link {
+                    padding: 10px;
+
+                    font-size: 14px;
+                    font-weight: bold;
+                    font-family: sans-serif;
+                    text-decoration: none;
+                    color: black;
+                    
+                }
             }
             .body {
                 display: block;
