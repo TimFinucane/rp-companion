@@ -35,7 +35,12 @@ const base_environment =
                             namedExport: true
                         }
                     },
-                    {loader: "sass-loader"}
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            includePaths: ["src/"]
+                        }
+                    }
                 ]
             },
             {

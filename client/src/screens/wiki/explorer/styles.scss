@@ -1,3 +1,5 @@
+@import 'variables';
+
 .explorer {
     display: inline-block;
     width: 140px;
@@ -6,7 +8,8 @@
     vertical-align: top;
     padding: 5px;
 
-    background-color: slategrey;
+    border: solid 2px $primary-border;
+    background-color: $primary-base;
 
     font-family: sans-serif;
 
@@ -16,7 +19,7 @@
         padding: 5px;
         margin: -5px;
 
-        background-color: rgba(0, 0, 0, 0.34);
+        background-color: $primary-border;
 
         font-size: 18px;
         font-weight: bold;
